@@ -11,4 +11,4 @@ Persian (fa-IR, RTL) mother & child information site with free client-side tools
 npm ci && npm run build   # → dist/
 PORT=8080 npm start       # static server (serve)
 ```
-Set `SITE_URL` at build time for canonical URLs (default https://mamagol.up.railway.app). Railway builds via `Dockerfile`.
+Set `SITE_URL` at build time for canonical URLs (default https://web-production-2d5f6.up.railway.app). Railway builds via `Dockerfile`.

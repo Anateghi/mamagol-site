@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mamagol.up.railway.app/sitemap-index.xml
+Sitemap: https://web-production-2d5f6.up.railway.app/sitemap-index.xml

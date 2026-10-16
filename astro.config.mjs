@@ -3,7 +3,7 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
-const SITE = process.env.SITE_URL || 'https://mamagol.up.railway.app';
+const SITE = process.env.SITE_URL || 'https://web-production-2d5f6.up.railway.app';
 
 export default defineConfig({
   site: SITE,
