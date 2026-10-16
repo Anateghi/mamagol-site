@@ -1,0 +1,21 @@
+---
+import AffiliateLink from './AffiliateLink.astro';
+interface Item { name: string; query: string; note: string }
+const { items, placement = 'tool' }: { items: Item[]; placement?: string } = Astro.props;
+---
+<section class="my-10" aria-labelledby="prod-h">
+  <h2 id="prod-h" class="text-xl font-extrabold text-teal mb-1">محصولات مرتبط</h2>
+  <p class="text-sm text-muted mb-4">برخی پیوندهای این بخش همکاری در فروش هستند؛ اگر خرید کنید ممکن است ماماگل کمیسیون دریافت کند، بدون هزینهٔ اضافه برای شما. <a href="/affiliate-disclosure/">توضیحات بیشتر</a></p>
+  <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {items.map((it) => (
+      <div class="card p-5 flex flex-col">
+        <h3 class="font-extrabold">{it.name}</h3>
+        <p class="text-sm text-muted grow my-2">{it.note}</p>
+        <div class="flex flex-wrap gap-2">
+          <AffiliateLink partner="digikala" query={it.query} placement={placement} class="btn !py-1.5 !px-4 text-sm">دیجی‌کالا</AffiliateLink>
+          <AffiliateLink partner="torob" query={it.query} placement={placement} class="btn btn-ghost !py-1 !px-4 text-sm">مقایسه قیمت در ترب</AffiliateLink>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

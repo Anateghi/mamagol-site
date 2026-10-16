@@ -1,0 +1,8 @@
+---
+const { items }: { items: { name: string; href: string }[] } = Astro.props;
+---
+<nav aria-label="مسیر صفحه" class="text-sm text-muted mb-3">
+  <ol class="flex flex-wrap gap-1">
+    {items.map((it, i) => (<li>{i > 0 && <span aria-hidden="true" class="mx-1">‹</span>}{i < items.length - 1 ? <a href={it.href} class="no-underline">{it.name}</a> : <span aria-current="page">{it.name}</span>}</li>))}
+  </ol>
+</nav>

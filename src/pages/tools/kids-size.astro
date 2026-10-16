@@ -1,0 +1,69 @@
+---
+import Tool from '../../layouts/Tool.astro';
+const faq = [
+  { q: 'سایز کفش کودک را چطور اندازه بگیریم؟', a: 'کودک را روی کاغذ بایستانید (وزن روی هر دو پا)، از پشت پاشنه تا نوک بلندترین انگشت را علامت بزنید و فاصله را با خط‌کش به سانتی‌متر اندازه بگیرید. هر دو پا را اندازه بگیرید و پای بزرگ‌تر را مبنا قرار دهید.' },
+  { q: 'کفش کودک چقدر باید بزرگ‌تر از پا باشد؟', a: 'معمولاً حدود ۱ تا ۱٫۵ سانتی‌متر فضای اضافه (تقریباً به پهنای انگشت شست بزرگسال) جلوی انگشتان توصیه می‌شود تا پا جای حرکت و رشد داشته باشد. کفش خیلی بزرگ هم باعث زمین خوردن می‌شود.' },
+  { q: 'هر چند وقت سایز پای کودک عوض می‌شود؟', a: 'پای کودکان نوپا سریع رشد می‌کند؛ بهتر است اندازهٔ پا را هر ۲ تا ۳ ماه یک بار در سال‌های اول بررسی کنید.' },
+  { q: 'سایز لباس کودک بر اساس سن است یا قد؟', a: 'برچسب سایز لباس اروپایی (مثل ۶۸، ۷۴، ۸۰) در واقع قد کودک به سانتی‌متر است. اگر قد کودک را می‌دانید، انتخاب بر اساس قد دقیق‌تر از سن است.' },
+  { q: 'سایزهای این ابزار برای همهٔ برندها یکسان است؟', a: 'خیر. قالب کفش و لباس بین برندها متفاوت است. همیشه جدول سایز فروشنده را با اندازهٔ واقعی کودک مقایسه کنید.' },
+];
+const howto = [
+  'سن کودک را انتخاب کنید یا طول پا و قد را خودتان وارد کنید.',
+  'اگر طول پا وارد نشود، یک طول پای تقریبی برای آن سن استفاده می‌شود.',
+  'سایز کفش اروپایی = (طول پا + ۱٫۵ سانتی‌متر فضای اضافه) × ۱٫۵ (واحد پاریسی برابر ۲/۳ سانتی‌متر).',
+  'سایز لباس اروپایی بر اساس قد (یا بازهٔ قد معمول آن سن) انتخاب می‌شود.',
+];
+const ages = [['0','۰ تا ۳ ماه'],['3','۳ تا ۶ ماه'],['6','۶ تا ۹ ماه'],['9','۹ تا ۱۲ ماه'],['12','۱ تا ۱٫۵ سال'],['18','۱٫۵ تا ۲ سال'],['24','۲ تا ۳ سال'],['36','۳ تا ۴ سال'],['48','۴ تا ۵ سال'],['60','۵ تا ۶ سال'],['72','۶ تا ۷ سال'],['84','۷ تا ۸ سال']];
+---
+<Tool slug="kids-size" icon="size" category="UtilitiesApplication" title="سایز کفش و لباس کودک بر اساس سن" description="ابزار رایگان تعیین سایز کفش و لباس بچه: با سن یا اندازهٔ پا و قد کودک، سایز تقریبی کفش اروپایی و سایز لباس را پیدا کنید." h1="سایز کفش و لباس کودک بر اساس سن" intro="سن کودک را انتخاب کنید یا طول پا و قد را وارد کنید تا سایز تقریبی کفش (اروپایی) و لباس او را ببینید." faq={faq} howto={howto}
+  products={[
+    { name: 'کفش اولین قدم نوزاد', query: 'کفش نوزاد', note: 'زیره نرم و انعطاف‌پذیر برای نوپاها.' },
+    { name: 'لباس نوزادی نخی', query: 'لباس نوزاد نخی', note: 'پارچهٔ نخی برای پوست حساس.' },
+    { name: 'کفش بچگانه', query: 'کفش بچگانه', note: 'سایز را با جدول فروشنده و طول پای واقعی چک کنید.' },
+  ]}
+  related={[
+    { href: '/blog/kids-shoe-size-guide/', label: 'راهنمای سایز کفش بچه و نحوهٔ اندازه‌گیری پا' },
+    { href: '/blog/baby-clothing-size-guide/', label: 'راهنمای سایز لباس نوزاد و سیسمونی' },
+    { href: '/tools/growth-percentile/', label: 'صدک رشد کودک' },
+    { href: '/blog/baby-weight-height-chart/', label: 'جدول وزن و قد نوزاد' },
+  ]}>
+  <div class="grid gap-6 md:grid-cols-2">
+    <form class="space-y-4" onsubmit="return false">
+      <div class="field"><label for="age">سن کودک</label><select id="age">{ages.map(([v, l]) => <option value={v} selected={v === '12'}>{l}</option>)}</select></div>
+      <div class="grid grid-cols-2 gap-3">
+        <div class="field"><label for="foot">طول پا (سانتی‌متر، اختیاری)</label><input id="foot" inputmode="decimal" placeholder="مثلاً ۱۳" /></div>
+        <div class="field"><label for="h">قد (سانتی‌متر، اختیاری)</label><input id="h" inputmode="decimal" placeholder="مثلاً ۸۲" /></div>
+      </div>
+      <button class="btn" id="go" type="button">پیدا کردن سایز</button>
+    </form>
+    <div id="out" class="result" aria-live="polite"><p class="text-muted">نتیجه اینجا نمایش داده می‌شود.</p></div>
+  </div>
+  <Fragment slot="interpret">
+    <p>اگر طول پا را خودتان اندازه گرفته باشید، سایز کفش دقیق‌تر است؛ بدون آن، عدد فقط بر اساس طول پای معمول آن سن است و ممکن است یکی دو سایز تفاوت داشته باشد. برای لباس، اگر کودک بین دو سایز است، سایز بزرگ‌تر را بگیرید.</p>
+    <p>روش اندازه‌گیری درست را در <a href="/blog/kids-shoe-size-guide/">راهنمای سایز کفش بچه</a> و جدول سایز لباس را در <a href="/blog/baby-clothing-size-guide/">راهنمای سایز لباس نوزاد</a> ببینید.</p>
+  </Fragment>
+  <Fragment slot="how"><p>سیستم سایز اروپایی (پاریسی) هر واحد را ۲/۳ سانتی‌متر طول قالب کفش در نظر می‌گیرد. طول‌های تقریبی پا و قد برای هر سن، مقادیر میانگین گردشده‌اند و جای اندازه‌گیری را نمی‌گیرند.</p></Fragment>
+</Tool>
+<script>
+  import { num, faN } from '../../lib/jalali-select';
+  // approx. typical foot length (cm) and height range (cm) per age band (months)
+  const T: Record<string, { foot: number; h: [number, number] }> = {
+    0: { foot: 9, h: [50, 62] }, 3: { foot: 10, h: [62, 68] }, 6: { foot: 11, h: [68, 74] }, 9: { foot: 12, h: [72, 80] },
+    12: { foot: 13, h: [76, 86] }, 18: { foot: 14, h: [82, 92] }, 24: { foot: 15, h: [86, 98] }, 36: { foot: 16, h: [95, 104] },
+    48: { foot: 17, h: [102, 110] }, 60: { foot: 18, h: [108, 116] }, 72: { foot: 19, h: [114, 122] }, 84: { foot: 20, h: [120, 128] },
+  };
+  const SIZES = [50, 56, 62, 68, 74, 80, 86, 92, 98, 104, 110, 116, 122, 128, 134];
+  document.getElementById('go')!.onclick = () => {
+    const age = (document.getElementById('age') as HTMLSelectElement).value;
+    const t = T[age];
+    let foot = num(document.getElementById('foot') as HTMLInputElement); const measured = foot >= 7 && foot <= 25; if (!measured) foot = t.foot;
+    let h = num(document.getElementById('h') as HTMLInputElement); const hMeasured = h >= 45 && h <= 140;
+    const eu = Math.round((foot + 1.5) * 1.5);
+    const target = hMeasured ? h : t.h[1];
+    const cloth = SIZES.find((s) => s >= target) ?? 134;
+    document.getElementById('out')!.innerHTML = `<p class="text-sm text-muted">سایز تقریبی کفش (اروپایی)</p><p class="stat">${faN(eu)}</p>
+      <p class="text-sm">بر اساس طول پای ${faN(foot, 1)} سانتی‌متر ${measured ? '(اندازه‌گیری شما)' : '(میانگین تقریبی این سن)'} + ۱٫۵ سانتی‌متر فضای رشد</p>
+      <p class="text-sm text-muted mt-4">سایز تقریبی لباس</p><p class="stat">${faN(cloth)}</p>
+      <p class="text-sm">${hMeasured ? `برای قد ${faN(h, 1)} سانتی‌متر` : `بازهٔ قد معمول این سن: ${faN(t.h[0])} تا ${faN(t.h[1])} سانتی‌متر`}</p>`;
+  };
+</script>

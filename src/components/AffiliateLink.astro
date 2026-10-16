@@ -1,0 +1,8 @@
+---
+import { buildAffiliateUrl } from '../lib/affiliate';
+import type { Partner } from '../config/site';
+interface Props { partner: Partner; query: string; placement?: string; class?: string }
+const { partner, query, placement = 'content', class: cls = '' } = Astro.props;
+const href = buildAffiliateUrl(partner, query, placement);
+---
+<a href={href} rel="sponsored nofollow noopener" target="_blank" class={cls} data-event="affiliate_click" data-partner={partner} data-product={query}><slot /></a>

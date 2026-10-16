@@ -1,0 +1,9 @@
+---
+const { title = 'بیشتر بخوانید', links }: { title?: string; links: { href: string; label: string }[] } = Astro.props;
+---
+<section class="my-10">
+  <h2 class="text-xl font-extrabold text-teal mb-4">{title}</h2>
+  <ul class="grid gap-3 sm:grid-cols-2">
+    {links.map((l) => (<li><a href={l.href} class="card block p-4 font-bold no-underline hover:text-pom">{l.label} <span aria-hidden="true">←</span></a></li>))}
+  </ul>
+</section>

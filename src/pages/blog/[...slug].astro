@@ -1,0 +1,44 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Faq from '../../components/Faq.astro';
+import Products from '../../components/Products.astro';
+import RelatedLinks from '../../components/RelatedLinks.astro';
+import Disclaimer from '../../components/Disclaimer.astro';
+import Illustration from '../../components/Illustration.astro';
+import { tools } from '../../config/tools';
+import { faDate } from '../../lib/fa';
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((p) => ({ params: { slug: p.id }, props: { post: p, all: posts } }));
+}
+const { post, all } = Astro.props;
+const { Content } = await render(post);
+const d = post.data;
+const tool = tools.find((t) => t.slug === d.tool)!;
+const url = new URL(Astro.url.pathname, Astro.site).toString();
+const relatedPosts = d.related.map((s: string) => all.find((p: any) => p.id === s)).filter(Boolean);
+const schema = [
+  { '@context': 'https://schema.org', '@type': 'MedicalWebPage', headline: d.h1, name: d.title, description: d.description, inLanguage: 'fa-IR', url, datePublished: d.published.toISOString(), dateModified: d.updated.toISOString(), author: { '@type': 'Organization', name: 'تحریریهٔ ماماگل' }, publisher: { '@id': new URL('/#org', Astro.site).toString() }, image: new URL('/og.png', Astro.site).toString(), mainEntityOfPage: url, about: d.category },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: d.faq.map((f: any) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [ { '@type': 'ListItem', position: 1, name: 'ماماگل', item: new URL('/', Astro.site).toString() }, { '@type': 'ListItem', position: 2, name: 'مقالات', item: new URL('/blog/', Astro.site).toString() }, { '@type': 'ListItem', position: 3, name: d.h1, item: url } ] },
+];
+---
+<Base title={d.title} description={d.description} ogType="article" schema={schema}>
+  <article class="wrap pt-6">
+    <Breadcrumbs items={[{ name: 'خانه', href: '/' }, { name: 'مقالات', href: '/blog/' }, { name: d.h1, href: '' }]} />
+    <span class="chip">{d.category}</span>
+    <h1 class="text-3xl md:text-4xl font-black leading-snug mt-3 max-w-3xl">{d.h1}</h1>
+    <p class="text-sm text-muted mt-2">به‌روزرسانی: <time datetime={d.updated.toISOString().slice(0, 10)}>{faDate(d.updated)}</time> · نوشتهٔ تحریریهٔ ماماگل</p>
+    <a href={`/tools/${tool.slug}/`} class="card no-underline flex items-center gap-4 p-4 my-6 max-w-2xl border-s-4 border-saffron">
+      <Illustration name={tool.icon} class="w-12 h-12 shrink-0" />
+      <span><span class="block text-xs text-muted">ابزار رایگان مرتبط</span><span class="font-extrabold text-ink">{tool.name}</span> <span class="text-pom">← استفاده کنید</span></span>
+    </a>
+    <div class="prose"><Content /></div>
+    {d.products.length > 0 && <Products items={d.products} placement={`blog-${post.id}`} />}
+    <div class="max-w-3xl"><Faq items={d.faq} /></div>
+    <RelatedLinks links={[{ href: `/tools/${tool.slug}/`, label: tool.name }, ...relatedPosts.map((p: any) => ({ href: `/blog/${p.id}/`, label: p.data.h1 }))]} />
+    <Disclaimer />
+  </article>
+</Base>

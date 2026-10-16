@@ -1,0 +1,74 @@
+---
+import Tool from '../../layouts/Tool.astro';
+import JDate from '../../components/JDate.astro';
+const faq = [
+  { q: 'تاریخ زایمان چگونه محاسبه می‌شود؟', a: 'رایج‌ترین روش «قاعدهٔ نگله» است: ۲۸۰ روز (۴۰ هفته) به اولین روز آخرین قاعدگی اضافه می‌شود. این روش فرض می‌کند چرخهٔ قاعدگی ۲۸ روزه است؛ ماشین‌حساب ماماگل طول چرخهٔ شما را هم در نظر می‌گیرد.' },
+  { q: 'تاریخ زایمان چقدر دقیق است؟', a: 'تاریخ زایمان یک تخمین است و تنها درصد کمی از نوزادان دقیقاً در همان روز به دنیا می‌آیند. زایمان در بازهٔ هفتهٔ ۳۷ تا ۴۲ معمولاً طبیعی تلقی می‌شود و پزشک ممکن است تاریخ را بر اساس سونوگرافی اصلاح کند.' },
+  { q: 'سن بارداری از چه زمانی حساب می‌شود؟', a: 'سن بارداری به‌طور قراردادی از اولین روز آخرین قاعدگی حساب می‌شود، نه از روز لقاح. به همین دلیل در هفتهٔ اول و دوم بارداری هنوز لقاحی رخ نداده است.' },
+  { q: 'اگر تاریخ آخرین پریود را ندانم چه کنم؟', a: 'می‌توانید از گزینهٔ «تاریخ لقاح» استفاده کنید یا تاریخ را از سونوگرافی سه‌ماههٔ اول بپرسید؛ سونوگرافی اوایل بارداری معمولاً دقیق‌ترین راه تعیین سن بارداری است.' },
+  { q: 'سه‌ماهه‌های بارداری کدام هفته‌ها هستند؟', a: 'به‌طور معمول سه‌ماههٔ اول تا پایان هفتهٔ ۱۳، سه‌ماههٔ دوم از هفتهٔ ۱۴ تا پایان هفتهٔ ۲۷ و سه‌ماههٔ سوم از هفتهٔ ۲۸ تا زایمان در نظر گرفته می‌شود.' },
+  { q: 'آیا این ماشین‌حساب جای سونوگرافی را می‌گیرد؟', a: 'خیر. این ابزار فقط تخمینی بر اساس تاریخ‌ها می‌دهد. سن بارداری و تاریخ زایمان نهایی را پزشک یا ماما با معاینه و سونوگرافی تعیین می‌کند.' },
+];
+const howto = [
+  'اولین روز آخرین قاعدگی (LMP) را به تاریخ شمسی انتخاب کنید یا تاریخ لقاح را وارد کنید.',
+  'اگر چرخهٔ شما ۲۸ روزه نیست، طول معمول چرخه را وارد کنید تا تاریخ به اندازهٔ اختلاف با ۲۸ روز جابه‌جا شود.',
+  'ابزار ۲۸۰ روز به تاریخ LMP اصلاح‌شده اضافه می‌کند (یا ۲۶۶ روز به تاریخ لقاح) و تاریخ زایمان را نشان می‌دهد.',
+  'سن بارداری امروز با تقسیم فاصلهٔ روزها بر ۷ به صورت «هفته + روز» محاسبه می‌شود.',
+];
+---
+<Tool slug="due-date" icon="due-date" title="محاسبه تاریخ زایمان و سن بارداری شمسی" description="ماشین‌حساب رایگان تاریخ زایمان با تاریخ شمسی: با وارد کردن اولین روز آخرین پریود، تاریخ تقریبی زایمان، هفتهٔ بارداری و سه‌ماهه را ببینید." h1="محاسبه تاریخ زایمان و سن بارداری" intro="تاریخ آخرین قاعدگی را به شمسی وارد کنید تا تاریخ تقریبی زایمان، هفته و روز بارداری و سه‌ماههٔ فعلی را فوراً ببینید." faq={faq} howto={howto}
+  products={[
+    { name: 'اسید فولیک و مکمل بارداری', query: 'مکمل بارداری', note: 'فقط با نظر پزشک یا ماما مصرف کنید؛ مقایسهٔ برندها و قیمت‌ها.' },
+    { name: 'بالش بارداری', query: 'بالش بارداری', note: 'برای راحتی خواب به پهلو در ماه‌های آخر.' },
+    { name: 'کرم ترک پوست بارداری', query: 'کرم ترک بارداری', note: 'مرطوب‌کننده‌های مناسب دوران بارداری.' },
+  ]}
+  related={[
+    { href: '/blog/early-pregnancy-symptoms/', label: 'علائم اولیهٔ بارداری قبل از عقب افتادن پریود' },
+    { href: '/blog/pregnancy-week-by-week/', label: 'بارداری هفته به هفته: هر سه‌ماهه چه اتفاقی می‌افتد؟' },
+    { href: '/blog/first-trimester-nutrition/', label: 'تغذیه در سه‌ماههٔ اول بارداری' },
+    { href: '/tools/ovulation/', label: 'تقویم تخمک‌گذاری و روزهای باروری' },
+  ]}>
+  <div class="grid gap-6 md:grid-cols-2">
+    <form id="dd" class="space-y-4" onsubmit="return false">
+      <div class="field"><label for="mode">مبنای محاسبه</label>
+        <select id="mode"><option value="lmp">اولین روز آخرین قاعدگی</option><option value="conc">تاریخ لقاح</option></select></div>
+      <JDate id="jd" label="تاریخ (شمسی)" />
+      <div class="field" id="cyc-wrap"><label for="cyc">طول چرخهٔ قاعدگی (روز)</label><input id="cyc" inputmode="numeric" value="۲۸" /></div>
+      <button class="btn" id="go" type="button">محاسبه کن</button>
+    </form>
+    <div id="out" class="result" aria-live="polite"><p class="text-muted">نتیجه اینجا نمایش داده می‌شود.</p></div>
+  </div>
+  <Fragment slot="interpret">
+    <p>نتیجه سه بخش دارد: <strong>تاریخ تقریبی زایمان</strong>، <strong>سن بارداری امروز</strong> (هفته و روز) و <strong>سه‌ماههٔ فعلی</strong>. یادتان باشد تاریخ زایمان مرکز یک بازه است؛ زایمان از ابتدای هفتهٔ ۳۷ «ترم» محسوب می‌شود و تا ۴۲ هفته هم می‌تواند طبیعی باشد.</p>
+    <p>اگر سونوگرافی سه‌ماههٔ اول تاریخ متفاوتی نشان داده، معمولاً پزشک تاریخ سونوگرافی را مبنا قرار می‌دهد. برای آشنایی با تغییرات هر مرحله، <a href="/blog/pregnancy-week-by-week/">راهنمای بارداری هفته به هفته</a> را بخوانید.</p>
+  </Fragment>
+  <Fragment slot="how"><p>این ابزار بر پایهٔ قاعدهٔ نگله (Naegele) کار می‌کند که در منابع مامایی مانند راهنماهای ACOG نیز به‌عنوان روش پایهٔ تخمین مطرح است.</p></Fragment>
+</Tool>
+<script>
+  import { addDays, differenceInCalendarDays } from 'date-fns-jalali';
+  import { setupJalali, num, faN, faD } from '../../lib/jalali-select';
+  const get = setupJalali(document.getElementById('jd')!, 30, 1, 0);
+  const mode = document.getElementById('mode') as HTMLSelectElement;
+  const cyc = document.getElementById('cyc') as HTMLInputElement;
+  mode.onchange = () => (document.getElementById('cyc-wrap')!.hidden = mode.value === 'conc');
+  document.getElementById('go')!.onclick = () => {
+    const out = document.getElementById('out')!;
+    const d = get();
+    let c = num(cyc); if (!(c >= 20 && c <= 45)) c = 28;
+    const lmp = mode.value === 'lmp' ? addDays(d, c - 28) : addDays(d, -14);
+    const due = addDays(lmp, 280);
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const ga = differenceInCalendarDays(today, lmp);
+    if (ga < 0) { out.innerHTML = '<p>تاریخ وارد شده در آینده است. لطفاً تاریخ را بررسی کنید.</p>'; return; }
+    if (ga > 300) { out.innerHTML = '<p>این تاریخ بیش از ۴۲ هفته پیش است. لطفاً تاریخ را بررسی کنید.</p>'; return; }
+    const w = Math.floor(ga / 7), r = ga % 7;
+    const tri = w < 14 ? 'اول' : w < 28 ? 'دوم' : 'سوم';
+    const left = differenceInCalendarDays(due, today);
+    const pct = Math.min(100, Math.round((ga / 280) * 100));
+    out.innerHTML = `<p class="text-sm text-muted">تاریخ تقریبی زایمان</p><p class="stat">${faD(due, true)}</p>
+      <p class="mt-3">سن بارداری امروز: <strong>${faN(w)} هفته و ${faN(r)} روز</strong> · سه‌ماههٔ <strong>${tri}</strong></p>
+      <div class="h-3 rounded-full bg-white mt-3 overflow-hidden" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"><div class="h-full bg-pom" style="width:${pct}%"></div></div>
+      <p class="text-sm mt-2">${left >= 0 ? `حدود ${faN(left)} روز تا تاریخ تخمینی زایمان` : `${faN(-left)} روز از تاریخ تخمینی گذشته است؛ با پزشک خود در تماس باشید.`}</p>
+      <p class="text-sm mt-2">بازهٔ ترم (۳۷ تا ۴۲ هفته): ${faD(addDays(lmp, 259))} تا ${faD(addDays(lmp, 294))}</p>`;
+  };
+</script>

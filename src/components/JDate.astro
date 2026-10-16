@@ -1,0 +1,11 @@
+---
+const { id, label } = Astro.props;
+---
+<fieldset class="field" data-jdate id={id}>
+  <legend class="font-bold text-[.92rem] mb-1">{label}</legend>
+  <div class="grid grid-cols-3 gap-2">
+    <select data-part="d" aria-label="روز"></select>
+    <select data-part="m" aria-label="ماه"></select>
+    <select data-part="y" aria-label="سال"></select>
+  </div>
+</fieldset>

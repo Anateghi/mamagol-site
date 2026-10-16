@@ -1,0 +1,15 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Illustration from '../../components/Illustration.astro';
+import { tools } from '../../config/tools';
+---
+<Base title="ابزارهای رایگان بارداری و کودک" description="همهٔ ابزارهای رایگان ماماگل با تاریخ شمسی: محاسبه تاریخ زایمان، تقویم تخمک‌گذاری، صدک رشد WHO، مقدار شیر خشک و سایز کفش و لباس کودک.">
+  <div class="wrap pt-6">
+    <Breadcrumbs items={[{ name: 'خانه', href: '/' }, { name: 'ابزارها', href: '' }]} />
+    <h1 class="text-3xl font-black"><span class="squiggle">ابزارهای رایگان ماماگل</span></h1>
+    <div class="grid gap-5 mt-8 sm:grid-cols-2 lg:grid-cols-3">
+      {tools.map((t) => (<a href={`/tools/${t.slug}/`} class="card p-6 no-underline text-ink flex gap-4 items-start hover:-translate-y-0.5 transition"><Illustration name={t.icon} class="w-14 h-14 shrink-0" /><span><h2 class="font-extrabold text-lg">{t.name}</h2><p class="text-sm text-muted">{t.short}</p></span></a>))}
+    </div>
+  </div>
+</Base>

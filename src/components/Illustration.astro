@@ -1,0 +1,42 @@
+---
+// Custom hand-built SVG illustrations for the Mamagol brand.
+const { name, class: cls = '' } = Astro.props;
+---
+{name === 'hero' && (
+<svg class={cls} viewBox="0 0 420 360" role="img" aria-label="تصویر مادر و نوزاد در آغوش، زیر ماه و ستاره‌ها">
+  <circle cx="220" cy="190" r="160" fill="#F6DCE2"/>
+  <circle cx="330" cy="70" r="26" fill="#E9A23B"/><circle cx="342" cy="62" r="22" fill="#F6DCE2"/>
+  <g fill="#E9A23B"><path d="M90 60l4 10 10 4-10 4-4 10-4-10-10-4 10-4z"/><path d="M370 160l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/><circle cx="60" cy="170" r="4"/><circle cx="385" cy="250" r="3"/></g>
+  <!-- mother -->
+  <path d="M150 340c0-90 30-150 85-150s85 60 85 150z" fill="#1E5560"/>
+  <circle cx="232" cy="130" r="44" fill="#E7B79A"/>
+  <path d="M186 132c-6-48 26-74 58-70 34 4 52 34 44 72-10-20-28-34-52-36-22-2-38 12-50 34z" fill="#2B2320"/>
+  <path d="M274 120c18 30 14 70-6 92" stroke="#2B2320" stroke-width="16" fill="none" stroke-linecap="round"/>
+  <path d="M220 140q6 6 14 0" stroke="#8E2D47" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- baby bundle -->
+  <path d="M168 250c10-30 60-40 110-20 22 9 20 40-6 50-40 14-92 6-104-30z" fill="#FBF5EC"/>
+  <path d="M176 254c30 4 66 2 96-12" stroke="#E9A23B" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="2 12"/>
+  <circle cx="196" cy="238" r="22" fill="#F0C6AC"/>
+  <path d="M187 238q4 3 8 0M200 238q4 3 8 0" stroke="#2B2320" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M176 230c4-18 30-22 40-6" fill="#B8405E"/>
+  <!-- arm -->
+  <path d="M290 230c-20 40-80 50-120 30" stroke="#E7B79A" stroke-width="20" fill="none" stroke-linecap="round"/>
+  <!-- flower -->
+  <g transform="translate(96 280)"><path d="M0-20c8 0 12 8 8 14 8-2 14 6 10 12s-12 6-14 0c0 8-8 12-14 8s-4-12 2-14c-8-2-10-10-4-14s12 0 12 6c0-8 0-12 0-12z" fill="#B8405E"/><circle r="5" fill="#E9A23B"/><path d="M0 8v40" stroke="#1E5560" stroke-width="4"/></g>
+</svg>
+)}
+{name === 'due-date' && (
+<svg class={cls} viewBox="0 0 64 64" aria-hidden="true"><rect x="8" y="12" width="48" height="44" rx="10" fill="#F6DCE2"/><rect x="8" y="12" width="48" height="12" rx="6" fill="#B8405E"/><path d="M20 8v10M44 8v10" stroke="#1E5560" stroke-width="4" stroke-linecap="round"/><path d="M32 50s-12-7-12-15c0-4 3-7 6.5-7 2.5 0 4.5 1.5 5.5 3.5 1-2 3-3.5 5.5-3.5 3.5 0 6.5 3 6.5 7 0 8-12 15-12 15z" fill="#B8405E"/></svg>
+)}
+{name === 'ovulation' && (
+<svg class={cls} viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="24" fill="none" stroke="#DCEBEC" stroke-width="8"/><path d="M32 8a24 24 0 0 1 22 15" stroke="#E9A23B" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="54" cy="24" r="6" fill="#B8405E"/><circle cx="32" cy="32" r="9" fill="#FBEBCF"/><circle cx="32" cy="32" r="4" fill="#E9A23B"/></svg>
+)}
+{name === 'growth' && (
+<svg class={cls} viewBox="0 0 64 64" aria-hidden="true"><rect x="6" y="8" width="52" height="48" rx="10" fill="#DCEBEC"/><path d="M14 46c10-4 16-14 24-22s14-10 18-10" stroke="#1E5560" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M14 50c12-2 20-10 28-16s10-8 14-8" stroke="#E9A23B" stroke-width="3" fill="none" stroke-dasharray="3 4"/><circle cx="38" cy="24" r="5" fill="#B8405E"/></svg>
+)}
+{name === 'formula' && (
+<svg class={cls} viewBox="0 0 64 64" aria-hidden="true"><path d="M27 6h10l2 8H25z" fill="#E9A23B"/><rect x="22" y="14" width="20" height="6" rx="3" fill="#1E5560"/><path d="M22 20h20l2 30a6 6 0 0 1-6 6H26a6 6 0 0 1-6-6z" fill="#FBF5EC" stroke="#1E5560" stroke-width="3"/><path d="M21.5 34h21l1.3 16a5 5 0 0 1-5 5H26a5 5 0 0 1-5-5z" fill="#F6DCE2"/><path d="M28 28h6M28 40h6M28 46h6" stroke="#B8405E" stroke-width="2.5" stroke-linecap="round"/></svg>
+)}
+{name === 'size' && (
+<svg class={cls} viewBox="0 0 64 64" aria-hidden="true"><path d="M10 40c0-10 4-20 12-22 4 6 10 8 14 4l4 8c8 2 16 6 16 12v4H10z" fill="#B8405E"/><rect x="8" y="46" width="50" height="6" rx="3" fill="#1E5560"/><circle cx="22" cy="30" r="2" fill="#FBF5EC"/><circle cx="28" cy="33" r="2" fill="#FBF5EC"/><path d="M6 58h52" stroke="#E9A23B" stroke-width="3" stroke-dasharray="2 4"/></svg>
+)}

@@ -1,0 +1,15 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+const posts = (await getCollection('blog')).sort((a, b) => +b.data.updated - +a.data.updated);
+---
+<Base title="مقالات بارداری و کودک" description="مقاله‌های ماماگل دربارهٔ بارداری، تخمک‌گذاری، رشد نوزاد، تغذیه با شیر خشک و غذای کمکی و انتخاب سایز لباس و کفش کودک؛ ساده، دقیق و کاربردی.">
+  <div class="wrap pt-6">
+    <Breadcrumbs items={[{ name: 'خانه', href: '/' }, { name: 'مقالات', href: '' }]} />
+    <h1 class="text-3xl font-black"><span class="squiggle">مقالات ماماگل</span></h1>
+    <div class="grid gap-5 mt-8 sm:grid-cols-2 lg:grid-cols-3">
+      {posts.map((p) => (<a href={`/blog/${p.id}/`} class="card p-5 no-underline text-ink hover:-translate-y-0.5 transition"><span class="chip">{p.data.category}</span><h2 class="font-extrabold text-lg mt-3 leading-8">{p.data.h1}</h2><p class="text-sm text-muted mt-2">{p.data.description}</p></a>))}
+    </div>
+  </div>
+</Base>

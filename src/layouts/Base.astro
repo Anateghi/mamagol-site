@@ -1,0 +1,61 @@
+---
+import '../styles/global.css';
+import Logo from '../components/Logo.astro';
+import { site } from '../config/site';
+import { tools } from '../config/tools';
+interface Props { title: string; description: string; ogType?: string; schema?: object[]; noindex?: boolean }
+const { title, description, ogType = 'website', schema = [], noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+const fullTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
+const og = new URL('/og.png', Astro.site).toString();
+const org = { '@context': 'https://schema.org', '@type': 'Organization', '@id': new URL('/#org', Astro.site).toString(), name: site.name, alternateName: site.nameEn, url: Astro.site!.toString(), logo: new URL('/logo.svg', Astro.site).toString() };
+const web = { '@context': 'https://schema.org', '@type': 'WebSite', name: site.name, url: Astro.site!.toString(), inLanguage: 'fa-IR', publisher: { '@id': org['@id'] } };
+const ld = [org, web, ...schema];
+---
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  <link rel="alternate" hreflang="fa-IR" href={canonical} />
+  {noindex && <meta name="robots" content="noindex" />}
+  <meta name="theme-color" content="#B8405E" />
+  <link rel="icon" href="/logo.svg" type="image/svg+xml" />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+  <meta property="og:type" content={ogType} />
+  <meta property="og:locale" content="fa_IR" />
+  <meta property="og:site_name" content={site.name} />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={og} />
+  <meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={fullTitle} /><meta name="twitter:description" content={description} /><meta name="twitter:image" content={og} />
+  <link rel="preload" href="/fonts/vazirmatn-arabic.woff2" as="font" type="font/woff2" crossorigin />
+  {ld.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
+</head>
+<body class="min-h-screen flex flex-col">
+  <a href="#main" class="sr-only focus:not-sr-only">پرش به محتوا</a>
+  <header class="bg-cream/90 backdrop-blur sticky top-0 z-10 border-b border-[#eadfd2]">
+    <div class="wrap flex items-center justify-between py-3">
+      <a href="/" class="no-underline" aria-label="ماماگل - صفحهٔ اصلی"><Logo /></a>
+      <nav aria-label="منوی اصلی"><ul class="flex gap-5 font-bold">{site.nav.map((n) => <li><a href={n.href} class="no-underline text-ink hover:text-pom">{n.label}</a></li>)}</ul></nav>
+    </div>
+  </header>
+  <main id="main" class="grow"><slot /></main>
+  <footer class="bg-teal text-cream mt-16">
+    <div class="wrap grid gap-8 py-10 md:grid-cols-3 text-sm">
+      <div><div class="bg-cream inline-block rounded-2xl px-3 py-2"><Logo size={36} /></div><p class="mt-3 opacity-90">{site.tagline}. ابزارهای رایگان و مقاله‌های دقیق برای بارداری و سال‌های اول زندگی کودک.</p></div>
+      <div><h2 class="font-extrabold mb-2">ابزارهای رایگان</h2><ul class="space-y-1">{tools.map((t) => <li><a class="text-cream" href={`/tools/${t.slug}/`}>{t.name}</a></li>)}</ul></div>
+      <div><h2 class="font-extrabold mb-2">ماماگل</h2><ul class="space-y-1">
+        <li><a class="text-cream" href="/about/">درباره ما</a></li><li><a class="text-cream" href="/editorial-policy/">سیاست محتوایی</a></li>
+        <li><a class="text-cream" href="/privacy/">حریم خصوصی</a></li><li><a class="text-cream" href="/affiliate-disclosure/">افشای همکاری در فروش</a></li><li><a class="text-cream" href="/contact/">تماس</a></li></ul></div>
+    </div>
+    <p class="text-center text-xs opacity-80 pb-6">مطالب ماماگل جایگزین مشاورهٔ پزشکی نیست. © {new Date().getFullYear()} {site.nameEn}</p>
+  </footer>
+</body>
+</html>

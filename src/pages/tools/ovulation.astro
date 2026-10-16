@@ -1,0 +1,83 @@
+---
+import Tool from '../../layouts/Tool.astro';
+import JDate from '../../components/JDate.astro';
+const faq = [
+  { q: 'تخمک‌گذاری چند روز بعد از پریود است؟', a: 'تخمک‌گذاری به طول چرخه بستگی دارد و معمولاً حدود ۱۴ روز «قبل از» شروع پریود بعدی رخ می‌دهد. در چرخهٔ ۲۸ روزه حدود روز ۱۴ و در چرخهٔ ۳۲ روزه حدود روز ۱۸ است.' },
+  { q: 'روزهای باروری کدام‌اند؟', a: 'پنجرهٔ باروری شامل حدود ۵ روز قبل از تخمک‌گذاری و خود روز تخمک‌گذاری است، چون اسپرم می‌تواند تا چند روز در بدن زنده بماند ولی تخمک فقط حدود یک روز قابل باروری است.' },
+  { q: 'آیا تقویم تخمک‌گذاری برای پیشگیری از بارداری قابل اعتماد است؟', a: 'خیر. روش تقویمی به‌تنهایی روش مطمئنی برای پیشگیری نیست، به‌خصوص اگر چرخه‌ها نامنظم باشند. برای پیشگیری با پزشک یا ماما مشورت کنید.' },
+  { q: 'اگر پریودم نامنظم باشد چه؟', a: 'در چرخه‌های نامنظم پیش‌بینی تقویمی دقت کمتری دارد. ترکیب آن با نشانه‌هایی مثل تغییر ترشحات دهانهٔ رحم، کیت تست تخمک‌گذاری (LH) یا دمای پایهٔ بدن کمک می‌کند و بهتر است علت نامنظمی را با پزشک بررسی کنید.' },
+  { q: 'بهترین زمان نزدیکی برای باردار شدن چیست؟', a: 'نزدیکی در ۲ تا ۳ روز منتهی به تخمک‌گذاری و روز تخمک‌گذاری بیشترین شانس را دارد. بسیاری از راهنماها نزدیکی منظم هر ۲ تا ۳ روز در طول چرخه را پیشنهاد می‌کنند.' },
+];
+const howto = [
+  'اولین روز آخرین پریود و طول معمول چرخه را وارد کنید.',
+  'روز تخمک‌گذاری = تاریخ پریود بعدی منهای طول فاز لوتئال (پیش‌فرض ۱۴ روز).',
+  'پنجرهٔ باروری از ۵ روز قبل تا ۱ روز بعد از تخمک‌گذاری علامت‌گذاری می‌شود.',
+  'همین محاسبه برای سه چرخهٔ بعدی تکرار می‌شود.',
+];
+---
+<Tool slug="ovulation" icon="ovulation" title="تقویم تخمک‌گذاری و روزهای باروری شمسی" description="تقویم تخمک‌گذاری رایگان با تاریخ شمسی: روز تخمک‌گذاری، روزهای باروری و تاریخ پریود بعدی را برای سه چرخهٔ آینده محاسبه کنید." h1="تقویم تخمک‌گذاری و محاسبه روزهای باروری" intro="با وارد کردن تاریخ شروع آخرین پریود و طول چرخه، روزهای باروری و تاریخ تقریبی تخمک‌گذاری را روی تقویم شمسی ببینید." faq={faq} howto={howto}
+  products={[
+    { name: 'کیت تست تخمک‌گذاری (LH)', query: 'تست تخمک گذاری', note: 'تأیید زمان تخمک‌گذاری علاوه بر محاسبهٔ تقویمی.' },
+    { name: 'دماسنج دمای پایهٔ بدن', query: 'دماسنج دیجیتال دقیق', note: 'برای ثبت روزانهٔ دمای صبحگاهی.' },
+    { name: 'تست بارداری', query: 'تست بارداری', note: 'معمولاً از روز عقب افتادن پریود نتیجهٔ قابل اعتمادتری می‌دهد.' },
+  ]}
+  related={[
+    { href: '/blog/ovulation-signs/', label: 'علائم تخمک‌گذاری: از کجا بفهمم تخمک‌گذاری کرده‌ام؟' },
+    { href: '/blog/best-time-to-get-pregnant/', label: 'بهترین زمان برای باردار شدن' },
+    { href: '/blog/early-pregnancy-symptoms/', label: 'علائم اولیهٔ بارداری' },
+    { href: '/tools/due-date/', label: 'محاسبه تاریخ زایمان' },
+  ]}>
+  <div class="grid gap-6 md:grid-cols-2">
+    <form class="space-y-4" onsubmit="return false">
+      <JDate id="jd" label="اولین روز آخرین پریود (شمسی)" />
+      <div class="grid grid-cols-2 gap-3">
+        <div class="field"><label for="cyc">طول چرخه (روز)</label><input id="cyc" inputmode="numeric" value="۲۸" /></div>
+        <div class="field"><label for="lut">فاز لوتئال (روز)</label><input id="lut" inputmode="numeric" value="۱۴" /></div>
+      </div>
+      <button class="btn" id="go" type="button">نمایش تقویم</button>
+      <p class="text-xs text-muted flex flex-wrap gap-3"><span><span class="inline-block w-3 h-3 rounded bg-teal-soft align-middle"></span> پریود</span><span><span class="inline-block w-3 h-3 rounded bg-saffron-soft align-middle"></span> روزهای باروری</span><span><span class="inline-block w-3 h-3 rounded bg-pom align-middle"></span> تخمک‌گذاری</span></p>
+    </form>
+    <div id="out" class="result" aria-live="polite"><p class="text-muted">نتیجه اینجا نمایش داده می‌شود.</p></div>
+  </div>
+  <div id="cals" class="grid gap-4 mt-6 sm:grid-cols-2 lg:grid-cols-3"></div>
+  <Fragment slot="interpret">
+    <p>روزهای زرد «پنجرهٔ باروری» هستند و روز قرمز تاریخ تخمینی تخمک‌گذاری است. احتمال بارداری در ۲ تا ۳ روز پایانی این پنجره بیشتر است. این پیش‌بینی برای چرخه‌های منظم دقیق‌تر است؛ اگر طول چرخه‌های شما بیش از چند روز تغییر می‌کند، نتیجه را تقریبی بدانید.</p>
+    <p>برای اطمینان بیشتر، نشانه‌های بدن را هم دنبال کنید؛ در مقالهٔ <a href="/blog/ovulation-signs/">علائم تخمک‌گذاری</a> توضیح داده‌ایم.</p>
+  </Fragment>
+  <Fragment slot="how"><p>فاز لوتئال (فاصلهٔ تخمک‌گذاری تا پریود بعدی) در بیشتر زنان نسبتاً ثابت و حدود ۱۴ روز است؛ تفاوت طول چرخه‌ها عمدتاً از فاز اول (فولیکولار) می‌آید. اگر طول فاز لوتئال خود را می‌دانید، آن را تغییر دهید.</p></Fragment>
+</Tool>
+<script>
+  import { addDays, getYear, getMonth, getDate, getDaysInMonth, newDate, isSameDay } from 'date-fns-jalali';
+  import { setupJalali, num, faN, faD, MONTHS } from '../../lib/jalali-select';
+  const get = setupJalali(document.getElementById('jd')!, 10, 1, 0);
+  const run = () => {
+    let c = num(document.getElementById('cyc') as HTMLInputElement); if (!(c >= 20 && c <= 45)) c = 28;
+    let l = num(document.getElementById('lut') as HTMLInputElement); if (!(l >= 9 && l <= 18)) l = 14;
+    const p0 = get();
+    const cycles = [0, 1, 2].map((i) => { const start = addDays(p0, i * c); const next = addDays(start, c); const ov = addDays(next, -l); return { start, next, ov, f0: addDays(ov, -5), f1: addDays(ov, 1) }; });
+    const k = cycles[0];
+    document.getElementById('out')!.innerHTML = `<p class="text-sm text-muted">تخمک‌گذاری تخمینی</p><p class="stat">${faD(k.ov, true)}</p>
+      <p class="mt-2">روزهای باروری: <strong>${faD(k.f0)}</strong> تا <strong>${faD(k.f1)}</strong></p>
+      <p class="mt-1">پریود بعدی: <strong>${faD(k.next)}</strong></p>
+      <ul class="text-sm mt-3 space-y-1">${cycles.slice(1).map((x, i) => `<li>چرخهٔ ${faN(i + 2)}: تخمک‌گذاری ${faD(x.ov)} · پریود ${faD(x.next)}</li>`).join('')}</ul>`;
+    const today = new Date();
+    const cls = (d: Date) => {
+      for (const x of cycles) {
+        if (isSameDay(d, x.ov)) return 'ov';
+        if (d >= x.f0 && d <= x.f1) return 'fert';
+        if (d >= x.start && d < addDays(x.start, 5)) return 'per';
+      }
+      return '';
+    };
+    const months: Date[] = []; let m = newDate(getYear(p0), getMonth(p0), 1);
+    for (let i = 0; i < 3; i++) { months.push(m); m = addDays(m, getDaysInMonth(m)); }
+    document.getElementById('cals')!.innerHTML = months.map((mm) => {
+      const lead = (mm.getDay() + 1) % 7; // Saturday-first week
+      let h = `<div class="card p-4"><h3 class="font-extrabold text-center mb-2">${MONTHS[getMonth(mm)]} ${faN(getYear(mm), 0).replace(/٬/g, '')}</h3><div class="cal">${'شیدسچپج'.split('').map((x) => `<div class="h">${x}</div>`).join('')}`;
+      h += '<div></div>'.repeat(lead);
+      for (let d = 1; d <= getDaysInMonth(mm); d++) { const dt = newDate(getYear(mm), getMonth(mm), d); h += `<div class="${cls(dt)} ${isSameDay(dt, today) ? 'today' : ''}">${faN(d)}</div>`; }
+      return h + '</div></div>';
+    }).join('');
+  };
+  document.getElementById('go')!.onclick = run;
+</script>

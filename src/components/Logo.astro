@@ -1,0 +1,20 @@
+---
+const { size = 44, withText = true } = Astro.props;
+---
+<span class="inline-flex items-center gap-2" aria-label="ماماگل">
+  <svg width={size} height={size} viewBox="0 0 64 64" aria-hidden="true">
+    <!-- petals: mother's embrace forming a flower (گل) -->
+    <path d="M32 6c9 0 15 7 15 15 8-2 15 4 15 12s-6 13-13 13c1 8-6 14-17 14S14 54 15 46C8 46 2 41 2 33s7-14 15-12C17 13 23 6 32 6Z" fill="#B8405E"/>
+    <path d="M32 14c6 0 10 5 10 10s-4 8-10 8-10-3-10-8 4-10 10-10Z" fill="#FBF5EC" opacity=".18"/>
+    <!-- child in the heart of the flower -->
+    <circle cx="32" cy="33" r="11" fill="#FBF5EC"/>
+    <circle cx="32" cy="29.5" r="4" fill="#E9A23B"/>
+    <path d="M24.5 40c2-4.5 5-6.5 7.5-6.5s5.5 2 7.5 6.5" fill="#1E5560"/>
+  </svg>
+  {withText && (
+    <span class="leading-none">
+      <span class="block text-2xl font-black tracking-tight text-pom-dark">ماماگل</span>
+      <span class="block text-[.68rem] font-semibold text-teal">mamagol · مادر و کودک</span>
+    </span>
+  )}
+</span>

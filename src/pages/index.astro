@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Illustration from '../components/Illustration.astro';
+import { tools } from '../config/tools';
+import { site } from '../config/site';
+const posts = (await getCollection('blog')).sort((a, b) => +b.data.updated - +a.data.updated).slice(0, 6);
+---
+<Base title={`${site.name} | ابزارهای رایگان بارداری و کودک با تاریخ شمسی`} description={site.description}>
+  <section class="relative overflow-hidden">
+    <svg class="absolute -top-20 -start-24 w-96 opacity-60" viewBox="0 0 200 200" aria-hidden="true"><path d="M40 100c0-40 30-70 70-60s60 40 50 80-50 50-80 40-40-20-40-60z" fill="#FBEBCF"/></svg>
+    <div class="wrap relative grid items-center gap-8 py-12 md:grid-cols-2">
+      <div>
+        <span class="chip">رایگان · بدون ثبت‌نام · تاریخ شمسی</span>
+        <h1 class="text-4xl md:text-5xl font-black leading-[1.35] mt-4">از اولین هفتهٔ بارداری تا <span class="text-pom squiggle">اولین قدم‌ها</span>، کنارتان هستیم</h1>
+        <p class="text-lg text-muted mt-5 max-w-xl">ماماگل مجموعه‌ای از ابزارهای دقیق و ساده برای مادران و پدران است: تاریخ زایمان، روزهای باروری، صدک رشد بر اساس استاندارد WHO، مقدار شیر خشک و سایز لباس و کفش کودک.</p>
+        <div class="flex flex-wrap gap-3 mt-7"><a class="btn" href="/tools/due-date/">محاسبه تاریخ زایمان</a><a class="btn btn-ghost" href="/tools/">همهٔ ابزارها</a></div>
+      </div>
+      <Illustration name="hero" class="w-full max-w-md mx-auto" />
+    </div>
+  </section>
+  <section class="wrap py-8" aria-labelledby="tools-h">
+    <h2 id="tools-h" class="text-2xl font-black mb-6">ابزارهای رایگان</h2>
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+      {tools.map((t, i) => (<a href={`/tools/${t.slug}/`} class={`card p-5 no-underline text-ink hover:-translate-y-1 transition ${i === 0 ? 'lg:col-span-1 bg-pom-soft' : ''}`}><Illustration name={t.icon} class="w-12 h-12" /><h3 class="font-extrabold mt-3 leading-7">{t.name}</h3><p class="text-sm text-muted mt-1">{t.short}</p></a>))}
+    </div>
+  </section>
+  <section class="bg-teal text-cream my-12">
+    <div class="wrap grid gap-6 py-10 md:grid-cols-3 text-center">
+      <div><p class="text-3xl font-black text-saffron">شمسی</p><p>همهٔ تاریخ‌ها با تقویم ایرانی</p></div>
+      <div><p class="text-3xl font-black text-saffron">WHO</p><p>صدک رشد با داده‌های رسمی استاندارد رشد</p></div>
+      <div><p class="text-3xl font-black text-saffron">حریم خصوصی</p><p>محاسبه‌ها فقط در مرورگر شما انجام می‌شود</p></div>
+    </div>
+  </section>
+  <section class="wrap py-4" aria-labelledby="posts-h">
+    <div class="flex justify-between items-end mb-6"><h2 id="posts-h" class="text-2xl font-black">تازه‌ترین مقالات</h2><a href="/blog/" class="font-bold">همهٔ مقالات ←</a></div>
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {posts.map((p) => (<a href={`/blog/${p.id}/`} class="card p-5 no-underline text-ink"><span class="chip">{p.data.category}</span><h3 class="font-extrabold text-lg mt-3 leading-8">{p.data.h1}</h3><p class="text-sm text-muted mt-2">{p.data.description}</p></a>))}
+    </div>
+  </section>
+</Base>
